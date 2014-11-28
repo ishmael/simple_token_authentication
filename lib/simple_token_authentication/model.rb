@@ -1,3 +1,5 @@
+require 'active_support/concern'
+require 'simple_token_authentication/token_generator'
 require 'simple_token_authentication/strategy'
 
 module Devise
