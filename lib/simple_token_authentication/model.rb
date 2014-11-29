@@ -12,7 +12,6 @@ module Devise
       included do
         private :generate_authentication_token
         private :token_suitable?
-        private :token_generator        
         before_save :ensure_authentication_token
       end
 
@@ -32,7 +31,7 @@ module Devise
           break token if token_suitable?(token)
         end
       end
-  
+
       def token_suitable?(token)
         self.class.where(authentication_token: token).count == 0
       end
