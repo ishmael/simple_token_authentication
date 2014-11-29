@@ -23,24 +23,19 @@ module Devise
       # this method is -and should be kept- idempotent.
       def ensure_authentication_token
         if authentication_token.blank?
-          self.authentication_token = generate_authentication_token(token_generator)
+          self.authentication_token = generate_authentication_token
         end
       end
 
-      def generate_authentication_token(token_generator)
+      def generate_authentication_token
         loop do
-          token = token_generator.generate_token
+          token = Devise.friendly_token
           break token if token_suitable?(token)
         end
       end
   
       def token_suitable?(token)
         self.class.where(authentication_token: token).count == 0
-      end
-  
-      # Private: Get one (always the same) object which behaves as a token generator
-      def token_generator
-        @token_generator ||= TokenGenerator.new
       end
 
       module ClassMethods
