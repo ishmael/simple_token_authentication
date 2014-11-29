@@ -26,7 +26,7 @@ module Devise
           self.authentication_token = generate_authentication_token(token_generator)
         end
       end
-  
+
       def generate_authentication_token(token_generator)
         loop do
           token = token_generator.generate_token
